@@ -9,13 +9,17 @@ class Settings(BaseSettings):
     QDRANT_URL: str = ""
     QDRANT_PATH: str = "./qdrant_data"
     
-    LLM_PROVIDER: str = "openai"
+    # Default to gemini — free tier, no OpenAI quota needed
+    LLM_PROVIDER: str = "gemini"
     LLM_API_KEY: str = ""
     GEMINI_API_KEY: str = ""
-    LLM_MODEL: str = "gpt-4o-mini"
+    # gemini-2.0-flash is the stable free-tier model
+    LLM_MODEL: str = "gemini-2.0-flash"
     LLM_API_BASE: Optional[str] = None
     
     class Config:
-        env_file = "../.env"
+        # Support .env one level up (local dev) OR in backend dir (production)
+        env_file = [".env", "../.env"]
+        env_file_encoding = "utf-8"
 
 settings = Settings()

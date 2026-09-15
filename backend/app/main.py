@@ -3,6 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 from app.core.config import settings
 from app.api.endpoints import router
 app = FastAPI(title="Codebase AI API")
@@ -16,6 +21,8 @@ app.add_middleware(
 )
 
 app.include_router(router, prefix="/api")
+
+logger.info(f"LLM Provider: {settings.LLM_PROVIDER} | Model: {settings.LLM_MODEL} | Gemini key set: {bool(settings.GEMINI_API_KEY)}")
 
 @app.get("/health")
 def health_check():
