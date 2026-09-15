@@ -7,7 +7,7 @@ node_modules/
 dist/
 build/
 .next/
-out/
+frontend/out/
 npm-debug.log
 yarn-error.log
 

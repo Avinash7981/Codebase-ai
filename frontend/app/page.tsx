@@ -18,8 +18,10 @@ export default function Home() {
     setError("");
     setIsLoading(true);
 
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+
     try {
-      const res = await fetch("http://localhost:8000/api/repositories", {
+      const res = await fetch(`${API_URL}/api/repositories`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ repository_url: repoUrl }),
@@ -31,7 +33,7 @@ export default function Home() {
       }
 
       const data = await res.json();
-      router.push(`/dashboard/${data.repository_id}`);
+      router.push(`/dashboard?id=${data.repository_id}`);
     } catch (err: any) {
       if (err.message === "Failed to fetch" || err.message === "Load failed") {
         setError("Network error: Could not connect to the backend API.");

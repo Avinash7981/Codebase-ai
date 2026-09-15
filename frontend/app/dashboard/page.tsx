@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import CodeViewer from "@/components/CodeViewer";
 import { Send, Terminal, Database, ArrowRight, Activity, Code, FileText, Layers } from "lucide-react";
 
-export default function Dashboard() {
-  const params = useParams();
-  const repoId = params.id as string;
-  
+function DashboardContent() {
+  const searchParams = useSearchParams();
+  const repoId = searchParams.get("id");
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
   const [status, setStatus] = useState<any>(null);
   const [question, setQuestion] = useState("");
   const [chat, setChat] = useState<{role: string, content: string, sources?: any[]}[]>([]);
@@ -18,8 +18,9 @@ export default function Dashboard() {
   useEffect(() => {
     // Poll for status
     const interval = setInterval(async () => {
+      if (!repoId) return;
       try {
-        const res = await fetch(`http://localhost:8000/api/repositories/${repoId}/status`, {
+        const res = await fetch(`${API_URL}/api/repositories/${repoId}/status`, {
           cache: "no-store",
           headers: {
             "Pragma": "no-cache",
@@ -58,7 +59,7 @@ export default function Dashboard() {
     }, 2500);
     
     try {
-      const res = await fetch(`http://localhost:8000/api/repositories/${repoId}/query`, {
+      const res = await fetch(`${API_URL}/api/repositories/${repoId}/query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userQ }),
@@ -270,5 +271,13 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Dashboard() {
+  return (
+    <Suspense fallback={<div className="flex h-screen items-center justify-center bg-zinc-950 text-white">Loading dashboard...</div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }
