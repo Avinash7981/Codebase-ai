@@ -1,68 +1,112 @@
-# Codebase AI
+UPDATE README.md — FINAL HACKATHON VERSION
 
-Codebase AI is a powerful codebase intelligence platform that allows you to easily ingest a GitHub repository and ask questions about its code using semantic retrieval and AI models.
+Replace the current README.md with a polished, professional, complete README for Codebase AI.
 
-## Features
+IMPORTANT:
+- Do not change application code.
+- Do not change functionality.
+- Only update README.md.
+- Include the live demo link prominently.
+- Make the README suitable for hackathon judges.
+- Clearly explain the problem, solution, architecture, workflow, tech stack, setup, API flow, features, security, limitations, and future scope.
+- Do not claim features that are not implemented.
+- Current deployed demo uses Gemini for LLM generation.
+- Keep the documentation technically accurate.
 
-- **GitHub Repository Ingestion**: Clone and analyze public repositories.
-- **Semantic Code Search**: Retrieve exact files, symbols, and code chunks.
-- **Hybrid Retrieval System**: Combines semantic embeddings with lexical/keyword search for maximum accuracy.
-- **Deterministic Local Fallback**: Continues to work reliably using standard Python libraries even when heavy dependencies (like BGE embeddings) fail to install.
-- **Persistent Vector Store**: Uses an optimized SQLite backend to ensure data survives server restarts.
-- **LLM Fallback Architecture**: Defaults to free-tier AI providers (Gemini) with automatic failover to fallback models (OpenAI) if unavailable.
-- **Live Code Viewer**: Automatically jumps to the cited source code file and line number.
+LIVE DEMO:
+https://codebase-ai-1.onrender.com
 
-## Architecture
+GITHUB:
+https://github.com/Avinash7981/Codebase-ai
 
-- **Backend**: FastAPI (Python)
-- **Frontend**: Next.js & React (TypeScript)
-- **Vector Database**: SQLite (using a lightweight localized chunk storage system)
+Use the following README content:
 
-## Getting Started
+# 🚀 Codebase AI
 
-### Prerequisites
+> **Understand any unfamiliar codebase using AI — with answers grounded in the actual source code.**
 
-- Node.js (v18+)
-- Python (3.10+)
-- `git` installed
+[🚀 Live Demo](https://codebase-ai-1.onrender.com) • [💻 GitHub](https://github.com/Avinash7981/Codebase-ai)
 
-### Environment Variables
+---
 
-Copy `.env.example` to `.env` and fill in your API keys:
+## 📌 Problem Statement
 
-```bash
-cp .env.example .env
-```
+Understanding an unfamiliar codebase is one of the biggest challenges for developers.
 
-Ensure you set:
-- `GEMINI_API_KEY`: Your Google Gemini API key.
-- `LLM_API_KEY`: Your OpenAI API key (for fallback).
+When joining an existing project, developers often spend hours:
 
-### Running the Backend
+- Searching through hundreds of files
+- Finding where a feature is implemented
+- Understanding relationships between classes and functions
+- Tracing how requests flow through the application
+- Understanding unfamiliar modules
+- Identifying the exact code responsible for a behavior
 
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000
-```
+Traditional keyword search is not enough because developers ask questions in natural language such as:
 
-### Running the Frontend
+> "Where is authentication handled?"
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+> "How does login work?"
 
-### Usage
+> "Where is this API request processed?"
 
-1. Open `http://localhost:3000` in your browser.
-2. Enter a public GitHub repository URL (e.g., `https://github.com/psf/requests`).
-3. Wait for the ingestion and indexing process to complete.
-4. Ask a question about the codebase!
+> "What happens when a new session is created?"
 
-## License
+The challenge is not simply finding text.
 
-MIT License
+The challenge is **understanding the codebase.**
+
+---
+
+# 💡 Proposed Solution
+
+## Codebase AI
+
+Codebase AI is an AI-powered codebase intelligence platform that allows developers to connect a GitHub repository and ask natural-language questions about its implementation.
+
+Instead of generating generic answers, Codebase AI retrieves relevant source code from the repository and uses that context to generate grounded answers.
+
+Every answer can be connected back to:
+
+- File
+- Symbol
+- Function/Class
+- Line range
+- Actual source code
+
+### Core Principle
+
+> **Find → Understand → Prove**
+
+Codebase AI doesn't just tell developers what the code does.
+
+It shows them **where the answer came from.**
+
+---
+
+# 🎯 Key Features
+
+### 🔗 GitHub Repository Ingestion
+
+Connect a GitHub repository and automatically analyze its source code.
+
+The system:
+
+1. Clones the repository
+2. Filters irrelevant files
+3. Parses source code
+4. Extracts meaningful symbols
+5. Creates semantic chunks
+6. Generates embeddings
+7. Stores searchable representations
+
+---
+
+### 🧠 Semantic Code Search
+
+Developers can ask questions using natural language.
+
+Example:
+
+```text
+Where is authentication handled?
