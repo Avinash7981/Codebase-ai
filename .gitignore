@@ -1,0 +1,41 @@
+# Environments
+.env
+.env.local
+
+# Node
+node_modules/
+dist/
+build/
+.next/
+out/
+npm-debug.log
+yarn-error.log
+
+# Python
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Databases and Local Data
+backend/data/
+*.db
+*.sqlite3
+
+# Temporary
+tmp/
+temp/
+scratch/
+.DS_Store
+
+# IDEs and Tools
+.vscode/
+.idea/
+*.swp
+*.swo
+demo_repo/

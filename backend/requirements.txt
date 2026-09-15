@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+qdrant-client
+
+pydantic
+pydantic-settings
+python-dotenv
+
+openai
+GitPython
